@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "www",
+    " m ",
+    "m  "
+  ],
+  "key": {
+    "w": {
+      "tag": "minecraft:planks"
+    },
+    "m": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "bloodcraft_ss:wood_scythe"
+  }
+}

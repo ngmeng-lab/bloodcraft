@@ -1,0 +1,15 @@
+{
+  "name": "关于这本书",
+  "icon": "minecraft:writable_book",
+  "category": "bloodcraft_ss:bloodcraft",
+  "pages": [
+    {
+      "type": "text",
+      "text": "很奇怪，你居然能看懂书上讲述内容所使用的文字，就像是这本书是你写的一样，你对这些字了如指掌。"
+    },
+    {
+      "type": "text",
+      "text": "这本书很破旧，并且充满了娟秀的笔记，尽管你根本就看不懂笔记写的什么内容......呃，很奇怪不是吗？"
+    }
+  ]
+}

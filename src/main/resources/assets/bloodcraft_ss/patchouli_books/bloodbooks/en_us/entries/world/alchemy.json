@@ -1,0 +1,18 @@
+{
+  "name": "关于炼金",
+  "icon": "minecraft:cauldron",
+  "category": "bloodcraft_ss:bloodcraft",
+  "pages": [
+    {
+      "type": "text",
+      "text": "坩埚似乎一直都没有什么很大的作用，很多时候都只能用来接水和染色......$(br2)但是你发现这本小册子似乎提到了炼金相关的内容，基础部分刚好需要用到坩埚。但是仅仅是如此，只是说明可能用到。$(br2)这会是坩埚的一个重要作用吗？抑或只是简单提及？"
+    },
+    {
+      "type": "image",
+      "title": "现在使用的坩埚",
+      "text": "普通且常见的坩埚，真的随处可见、随处可见、和随处可见，并且随时可做。",
+      "images": [
+        "bloodcraft_ss:textures/bookimages/item/cauldron.png"
+      ]}
+  ]
+}

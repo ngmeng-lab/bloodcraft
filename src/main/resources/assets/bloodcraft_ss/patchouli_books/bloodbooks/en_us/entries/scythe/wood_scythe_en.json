@@ -1,12 +1,23 @@
 {
   "name": "木制镰刀",
   "icon": "bloodcraft_ss:wood_scythe",
-  "category": "scythe/wood_scythe_ca",
+  "category": "bloodcraft_ss:wood_scythe_ca",
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "spotlight",
       "item": "bloodcraft_ss:wood_scythe",
-      "text": "血魔法的基础到不能再基础的武器，基础到甚至无法使用任何血魔法"
+      "text": "精心磨制的粗糙镰刀，但好歹也是一把镰刀......？"
+    },
+    {
+      "type": "text",
+      "item": "bloodcraft_ss:wood_scythe",
+      "text": "初学血魔法的新手使用的基础到不能再基础的武器，基础到甚至无法借此使用任何血魔法。$(br2)但毕竟这只是一把很普通的木头刀，单纯为了适应镰刀那奇怪的手感而生。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "bloodcraft_ss:wood_scythe",
+      "title": "木制镰刀",
+      "text": "一个基础镰刀，比木剑好使一点，但也就一点。"
     }
   ]
 }

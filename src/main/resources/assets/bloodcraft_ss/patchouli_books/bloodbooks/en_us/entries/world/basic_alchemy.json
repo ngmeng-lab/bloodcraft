@@ -1,0 +1,19 @@
+{
+  "name": "关于基础炼金术",
+  "icon": "minecraft:cauldron",
+  "category": "bloodcraft_ss:bloodcraft",
+  "pages": [
+    {
+      "type": "text",
+      "text": "通过使用萤石粉、红石、或矿石甚至是泥土等物品融合来获取另一个物品的一种技术。$(br2)因为并非等价，往往是炼制出来的物品比所有的材料加起来还要值钱，所以无法与那些宣扬等价交换的炼金术相提及。"
+    },
+    {
+      "type": "text",
+      "text": "你发现书的这一页夹着一张纸，上面写了一些奇怪的字，似乎出自一位少女之手，但是你看不懂在说什么。所以你把这些纸塞到了后一页，以便后续琢磨。"
+    },
+    {
+      "type": "text",
+      "text": "Alkyminth zorya thúra! Kylir dothar silvenka, orin fyntra myr scythe, aelya dozz bombar... Shyra’k ylthar dozz funna bombar, butryn vex’tilled, Ice-songa Aunthe sayeth thys artefact wyrm topple th’ entire castelra."
+    }
+  ]
+}

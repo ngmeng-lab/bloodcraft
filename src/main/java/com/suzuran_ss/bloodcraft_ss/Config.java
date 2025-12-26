@@ -1,4 +1,4 @@
-package com.suzuran_ss.bloodcraft;
+package com.suzuran_ss.bloodcraft_ss;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

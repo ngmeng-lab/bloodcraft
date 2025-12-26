@@ -1,4 +1,4 @@
-package com.suzuran_ss.bloodcraft.registry;
+package com.suzuran_ss.bloodcraft_ss.registry;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.suzuran_ss.bloodcraft.bloodcraft.MODID;
+import static com.suzuran_ss.bloodcraft_ss.bloodcraft.MODID;
 
 public class ModItems
 {
@@ -18,9 +18,10 @@ public class ModItems
             ITEMS.register("wood_scythe",
                     () -> new SwordItem(
                             Tiers.WOOD,
-                            2,          // 额外攻击力（基础木剑是 3，这里更低一点）
-                            -2.8f,      // 攻速（镰刀偏慢）
+                            8, //   额外攻击力
+                            -2.8f,      // 攻速
                             new Item.Properties()
+                                    .durability(64)     //耐久度
                     )
             );
 }
