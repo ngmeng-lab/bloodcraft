@@ -1,0 +1,15 @@
+Java Launcher: D:\JAVA\bin\java.exe
+Arguments: '--task, SRG_TO_MCP, --input, C:\Users\15804\.gradle\caches\modules-2\files-2.1\vazkii.patchouli\Patchouli\1.20.1-85-FORGE-SNAPSHOT\863208acc43ad25472c87882033fa34edbab07a9\Patchouli-1.20.1-85-FORGE-SNAPSHOT.jar, --output, C:\Users\15804\.gradle\caches\forge_gradle\deobf_dependencies\vazkii\patchouli\Patchouli\1.20.1-85-FORGE-SNAPSHOT_mapped_official_1.20.1\Patchouli-1.20.1-85-FORGE-SNAPSHOT_mapped_official_1.20.1.jar, --mcp, C:\Users\15804\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.20.1\mapping-1.20.1-mapping.zip, --strip-signatures'
+Classpath:
+ - C:\Users\15804\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\installertools\1.4.4\installertools-1.4.4-fatjar.jar
+Working directory: D:\mods\Minecraft\bloodcraft\build\_RenameSrg2Mcp_1733600394
+Main class: net.minecraftforge.installertools.ConsoleTool
+====================================
+Task: SRG_TO_MCP
+Input:  C:\Users\15804\.gradle\caches\modules-2\files-2.1\vazkii.patchouli\Patchouli\1.20.1-85-FORGE-SNAPSHOT\863208acc43ad25472c87882033fa34edbab07a9\Patchouli-1.20.1-85-FORGE-SNAPSHOT.jar
+Output: C:\Users\15804\.gradle\caches\forge_gradle\deobf_dependencies\vazkii\patchouli\Patchouli\1.20.1-85-FORGE-SNAPSHOT_mapped_official_1.20.1\Patchouli-1.20.1-85-FORGE-SNAPSHOT_mapped_official_1.20.1.jar
+MCP:    C:\Users\15804\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.20.1\mapping-1.20.1-mapping.zip
+Loading MCP Data
+Processing ZIP file
+Stripped Manifest of sha digests
+Process complete

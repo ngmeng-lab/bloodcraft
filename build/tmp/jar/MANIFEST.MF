@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: bloodcraft_ss
+Specification-Vendor: suzuran_ss
+Specification-Version: 1
+Implementation-Title: bloodcraft
+Implementation-Version: 1.0.0
+Implementation-Vendor: suzuran_ss
+Implementation-Timestamp: 2025-12-25T20:57:17+0800
+

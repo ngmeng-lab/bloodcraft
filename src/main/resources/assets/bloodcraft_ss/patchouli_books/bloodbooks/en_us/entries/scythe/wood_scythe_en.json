@@ -1,0 +1,12 @@
+{
+  "name": "木制镰刀",
+  "icon": "bloodcraft_ss:wood_scythe",
+  "category": "scythe/wood_scythe_ca",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "item": "bloodcraft_ss:wood_scythe",
+      "text": "血魔法的基础到不能再基础的武器，基础到甚至无法使用任何血魔法"
+    }
+  ]
+}
