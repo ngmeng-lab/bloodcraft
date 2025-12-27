@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    " m ",
+    "m  "
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:stone"
+    },
+    "m": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "bloodcraft_ss:stone_scythe"
+  }
+}

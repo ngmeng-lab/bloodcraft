@@ -1,0 +1,22 @@
+{
+  "name": "关于炼金坩埚",
+  "icon": "bloodcraft_ss:iron_cauldron",
+  "category": "bloodcraft_ss:bloodcraft",
+  "pages": [
+    {
+      "type": "text",
+      "text": "你在书的关于基础炼金术的部分发现了这个！"
+    },
+    {
+      "type": "spotlight",
+      "item": "bloodcraft_ss:iron_cauldron",
+      "text": "令你奇怪的是，这个炼金术使用的居然不是普通的炼药锅......而是一种在锅底多放了一些铁块的特殊坩埚？但是，在底部放置一些铁似乎并没有什么作用。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "bloodcraft_ss:iron_cauldron",
+      "title": "炼金坩埚",
+      "text": "底部多了一些铁的炼药锅，你对着书横竖都看不出来到底是怎么使用的，只知道通过底部似乎可以瞄到下方被重重方块遮挡的矿洞，不知是否为幻觉。"
+    }
+  ]
+}

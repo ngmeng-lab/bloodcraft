@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D D",
+    "D D",
+    "TTT"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "bloodcraft_ss:iron_cauldron"
+  }
+}

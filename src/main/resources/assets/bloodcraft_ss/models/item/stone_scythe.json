@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "bloodcraft_ss:item/stone_scythe"
+  }
+}

@@ -1,23 +1,29 @@
 {
-  "name": "木制镰刀",
+  "name": "简单镰刀",
   "icon": "bloodcraft_ss:wood_scythe",
   "category": "bloodcraft_ss:wood_scythe_ca",
   "pages": [
     {
       "type": "spotlight",
       "item": "bloodcraft_ss:wood_scythe",
-      "text": "精心磨制的粗糙镰刀，但好歹也是一把镰刀......？"
+      "text": "精心磨制的粗糙镰刀，但好歹也是一把镰刀......？$(br2)初学血魔法的新手使用的基础到不能再基础的武器，基础到甚至无法借此使用任何血魔法。$(br2)这只是一把很普通又简单的木头刀，单纯为了适应镰刀那奇怪的手感而生。"
     },
     {
-      "type": "text",
-      "item": "bloodcraft_ss:wood_scythe",
-      "text": "初学血魔法的新手使用的基础到不能再基础的武器，基础到甚至无法借此使用任何血魔法。$(br2)但毕竟这只是一把很普通的木头刀，单纯为了适应镰刀那奇怪的手感而生。"
+      "type": "spotlight",
+      "item": "bloodcraft_ss:stone_scythe",
+      "text": "简单但好用的石头镰刀，依然不能使用任何的血魔法。$(br2)毕竟这只是一把很普通的石头刀，且更笨重，但手感很好。"
     },
     {
       "type": "crafting",
       "recipe": "bloodcraft_ss:wood_scythe",
       "title": "木制镰刀",
       "text": "一个基础镰刀，比木剑好使一点，但也就一点。"
+    },
+    {
+      "type": "crafting",
+      "recipe": "bloodcraft_ss:stone_scythe",
+      "title": "石制镰刀",
+      "text": "也是一个基础镰刀，比石剑好使一点，但也就一点。"
     }
   ]
 }

@@ -1,4 +1,8 @@
 {
   "item.bloodcraft_ss.wood_scythe": "木制镰刀",
+  "item.bloodcraft_ss.stone_scythe": "石制镰刀",
+
+  "block.bloodcraft_ss.iron_cauldron": "炼金坩埚",
+
   "basic_alchemy": "翻译：炼金术很有趣！可以点石成金，也可以强化我的镰刀，还可以做炸弹......可惜我试过做一个好玩的炸弹但是被阻止了，冰之歌阿姨说这个东西会把整个城堡掀翻"
 }
