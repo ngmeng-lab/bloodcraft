@@ -1,0 +1,6 @@
+{
+  "name": "p.categories.world_magic.name",
+  "description": "p.categories.world_magic.description",
+  "icon": "minecraft:writable_book",
+  "sortnum": 1
+}

@@ -1,6 +1,6 @@
 {
-  "name": "血魔法学概述",
-  "description": "认识血魔法",
+  "name": "p.categories.bloodcraft.name",
+  "description": "p.categories.bloodcraft.description",
   "icon": "minecraft:writable_book",
   "sortnum": 0
 }

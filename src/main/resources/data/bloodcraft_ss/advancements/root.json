@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "bloodcraft_ss:redbook"
+    },
+    "title": {
+      "translate": "advancement.bloodcraft_ss.root.title"
+    },
+    "description": {
+      "translate": "advancement.bloodcraft_ss.root.description"
+    },
+    "background": "bloodcraft_ss:textures/gui/advancements/root.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "impossible"
+    ]
+  ]
+}

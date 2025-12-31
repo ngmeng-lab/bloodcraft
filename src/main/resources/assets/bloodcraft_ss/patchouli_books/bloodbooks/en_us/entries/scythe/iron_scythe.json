@@ -1,0 +1,19 @@
+{
+  "name": "p.scythe.iron_scythe.name",
+  "icon": "bloodcraft_ss:iron_scythe",
+  "category": "bloodcraft_ss:world_magic",
+  "advancement": "bloodcraft_ss:exotic_matter_advancement",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "bloodcraft_ss:iron_scythe",
+      "text": "p.scythe.iron_scythe.p1.text"
+    },
+    {
+      "type": "crafting",
+      "recipe": "bloodcraft_ss:iron_scythe",
+      "title": "p.scythe.iron_scythe.p2.title",
+      "text": "p.scythe.iron_scythe.p2.text"
+    }
+  ]
+}

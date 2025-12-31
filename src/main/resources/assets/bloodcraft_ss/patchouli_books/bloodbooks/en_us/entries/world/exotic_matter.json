@@ -1,0 +1,19 @@
+{
+  "name": "p.world.exotic_matter.name",
+  "icon": "bloodcraft_ss:exotic_matter",
+  "category": "bloodcraft_ss:world_magic",
+  "advancement": "bloodcraft_ss:scythe_advancement",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "bloodcraft_ss:exotic_matter",
+      "text": "p.world.exotic_matter.p1.text"
+    },
+    {
+      "type": "crafting",
+      "recipe": "bloodcraft_ss:exotic_matter",
+      "title": "p.world.exotic_matter.p2.title",
+      "text": "p.world.exotic_matter.p2.text"
+    }
+  ]
+}

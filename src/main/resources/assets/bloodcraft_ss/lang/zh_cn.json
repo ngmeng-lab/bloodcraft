@@ -1,8 +1,59 @@
 {
   "item.bloodcraft_ss.wood_scythe": "木制镰刀",
   "item.bloodcraft_ss.stone_scythe": "石制镰刀",
+  "item.bloodcraft_ss.iron_scythe": "§a铁镰刀",
+  "item.bloodcraft_ss.exotic_matter": "肮脏血源",
 
   "block.bloodcraft_ss.iron_cauldron": "炼金坩埚",
 
-  "basic_alchemy": "翻译：炼金术很有趣！可以点石成金，也可以强化我的镰刀，还可以做炸弹......可惜我试过做一个好玩的炸弹但是被阻止了，冰之歌阿姨说这个东西会把整个城堡掀翻"
+  "borderline-----------------------以下为成就类-----------------------borderline": "",
+  "advancement.bloodcraft_ss.root.title": "血源本书",
+  "advancement.bloodcraft_ss.root.description": "欢迎来到这个神秘的世界",
+  "advancement.scythe.title": "镰刀入门",
+  "advancement.scythe.description": "你掌握了镰刀的基础用法",
+  "advancement.exotic_matter.title": "奇怪的东西",
+  "advancement.exotic_matter.description": "按照书上的指引弄出来的物品",
+
+
+  "borderline1-----------------------以下为patchouli模组-----------------------1borderline": "",
+  "p.categories.bloodcraft.name": "血魔法学概述",
+  "p.categories.bloodcraft.description": "认识血魔法",
+  "p.categories.world_magic.name": "血魔法学理论",
+  "p.categories.world_magic.description": "血魔法的使用方式，或技巧",
+
+  "p.alchemy.iron_cauldron.name": "关于炼金坩埚",
+  "p.alchemy.iron_cauldron.p1.text": "我在书的关于基础炼金术的部分发现了这个！",
+  "p.alchemy.iron_cauldron.p2.text": "令我奇怪的是，这个炼金术使用的居然不是普通的炼药锅......而是一种在锅底多放了一些铁块的特殊坩埚？但是，在底部放置一些铁似乎并没有什么很大的作用。",
+  "p.alchemy.iron_cauldron.p3.text": "底部多了一些铁的炼药锅，我对着书横竖都看不出来到底是怎么使用的，只知道通过底部似乎可以瞄到下方被重重方块遮挡的矿洞，不知是否为幻觉。",
+
+  "p.scythe.iron_scythe.name": "铁镰刀",
+  "p.scythe.iron_scythe.p1.text": "一把铁质镰刀，拥有不俗的伤害。$(br2)在各方面都极其的优质，从这里开始，镰刀终于能承担起部分释放血魔法的职责了......但是我不会用，只知道这把镰刀似乎对面越强大自身也越强大。",
+  "p.scythe.iron_scythe.p2.title": "铁镰刀的合成方式",
+  "p.scythe.iron_scythe.p2.text": "一把铁的家伙！锋利，并且与血关联！",
+  "p.scythe.wood_scythe.name": "简单镰刀",
+  "p.scythe.wood_scythe.p1.text": "精心磨制的粗糙镰刀，但好歹也是一把镰刀......？$(br2)初学血魔法的新手使用的基础到不能再基础的武器，基础到甚至无法借此使用任何血魔法。$(br2)这只是一把很普通又简单的木头刀，单纯为了适应镰刀那奇怪的手感而生。",
+  "p.scythe.wood_scythe.p2.text": "简单但好用的石头镰刀，依然不能使用任何的血魔法。$(br2)毕竟这只是一把很普通的石头刀，且更笨重，但手感很好。",
+  "p.scythe.wood_scythe.p3.text": "一个基础镰刀，比木剑好使一点，但也就一点。",
+  "p.scythe.wood_scythe.p4.text": "也是一个基础镰刀，比石剑好使一点，但也就一点",
+
+  "p.world.alchemy.name": "关于炼金",
+  "p.world.alchemy.p1.text": "坩埚似乎一直都没有什么很大的作用，很多时候都只能用来接水和染色......$(br2)但是我发现这本小册子似乎提到了炼金相关的内容，基础部分刚好需要用到坩埚。但是仅仅是如此，只是说明可能用到。$(br2)这会是坩埚的一个重要作用吗？抑或只是简单提及？",
+  "p.world.alchemy.p2.title": "现在使用的坩埚（炼药锅）",
+  "p.world.alchemy.p2.text": "普通且常见的坩埚，真的随处可见、随处可见、和随处可见，并且随时可做。",
+  "p.world.basic_alchemy.name": "关于基础炼金术",
+  "p.world.basic_alchemy.p1.text": "通过使用萤石粉、红石、或矿石甚至是泥土等物品融合来获取另一个物品的一种技术。$(br2)因为并非等价，往往是炼制出来的物品比所有的材料加起来还要值钱，所以无法与那些宣扬等价交换的炼金术相提及。",
+  "p.world.basic_alchemy.p2.text": "我发现书的这一页夹着一张纸，上面写了一些奇怪的字，似乎出自一位少女之手，但是我看不懂在说什么。所以我把这些纸塞到了后一页，以便后续琢磨。",
+  "p.world.bloodcraft.name": "关于血魔法学",
+  "p.world.bloodcraft.p1.text": "相传，血魔法是一种皮肤苍白的类人吸血生物所使用的强大魔法，以血液为媒介强化自身或驱动手里的镰刀然后迸发出强大的效果，最强大的一位据说已经因此登神。不知怎的，这本小册子流落到了我的手里。",
+  "p.world.bloodcraft.p2.text": "血魔法是一类以血液与献祭为核心的魔法，可以通过逐步解锁的强大法术收割敌人获得升级素材或炼金素材进而强化镰刀。$(br2)高等级的法术不仅可以直接献祭指定范围内的所有生物然后强化镰刀，更拥有强大的效果。$(br2)血魔法以镰刀与炼金为核心。",
+  "p.world.exotic_matter.name": "肮脏血源",
+  "p.world.exotic_matter.p1.text": "一种经由腐肉和蜘蛛眼提取出来的物质，气味不是很好闻......相较之下我更乐意去泡在腐肉堆里。",
+  "p.world.exotic_matter.p2.title": "提炼方法",
+  "p.world.exotic_matter.p2.text": "一种使用血魔法必备的基础（很劣质的）物质......呃，实在不想承认血魔法居然能用到这个东西，我现在只想把这个东西扔进岩浆里销毁。越快越好，它让我不舒服。$(br2)这本书居然连这种东西都记在这上面？",
+  "p.world.thebooks.name": "关于这本书",
+  "p.world.thebooks.p1.text": "很奇怪，我居然能看懂书上讲述内容所使用的文字，就像是这本书是我写的一样，我对这些字了如指掌。",
+  "p.world.thebooks.p2.text": "这本书很破旧，并且充满了娟秀的笔记，尽管我根本就看不懂笔记写的什么内容......呃，很奇怪不是吗？",
+
+  "borderline2-----------------------以下为神明小故事-----------------------2borderline": "",
+  "basic_alchemy": "炼金术很有趣！可以点石成金，也可以强化我的镰刀，还可以做炸弹......可惜我试过做一个好玩的炸弹但是被阻止了，冰之歌阿姨说这个东西会把整个城堡掀翻"
 }

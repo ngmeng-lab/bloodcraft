@@ -1,0 +1,46 @@
+{
+  "parent": "bloodcraft_ss:root",
+  "display": {
+    "icon": {
+      "item": "bloodcraft_ss:wood_scythe"
+    },
+    "title": {
+      "translate": "advancement.scythe.title"
+    },
+    "description": {
+      "translate": "advancement.scythe.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_wood_scythe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [ "bloodcraft_ss:wood_scythe" ]
+          }
+        ]
+      }
+    },
+    "get_stone_scythe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [ "bloodcraft_ss:stone_scythe" ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_wood_scythe",
+      "get_stone_scythe"
+    ]
+  ]
+}

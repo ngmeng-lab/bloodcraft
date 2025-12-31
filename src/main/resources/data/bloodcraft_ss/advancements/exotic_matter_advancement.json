@@ -1,0 +1,35 @@
+{
+  "parent": "bloodcraft_ss:root",
+  "display": {
+    "icon": {
+      "item": "bloodcraft_ss:exotic_matter"
+    },
+    "title": {
+      "translate": "advancement.exotic_matter.title"
+    },
+    "description": {
+      "translate": "advancement.exotic_matter.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "get_exotic_matter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [ "bloodcraft_ss:exotic_matter" ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_exotic_matter"
+    ]
+  ]
+}

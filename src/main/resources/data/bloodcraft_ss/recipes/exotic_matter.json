@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FZZ",
+    "ZZ "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Z": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "result": {
+    "item": "bloodcraft_ss:exotic_matter"
+  }
+}
