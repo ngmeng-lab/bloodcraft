@@ -2,7 +2,7 @@ package com.suzuran_ss.bloodcraft_ss.menu;
 
 import com.suzuran_ss.bloodcraft_ss.menu.slot.IronCauldronResultSlot;
 import com.suzuran_ss.bloodcraft_ss.recipe.ModRecipes;
-import com.suzuran_ss.bloodcraft_ss.registry.BlockRegistry; // 添加导入
+import com.suzuran_ss.bloodcraft_ss.registry.BlockRegistry;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,9 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class IronCauldronMenu extends AbstractContainerMenu {
 
-    // 3x3 输入
+    /* ===== 3x3 输入 ===== */
     private final Container craftMatrix = new SimpleContainer(9);
-    // 输出
+
+    /* ===== 输出 ===== */
     private final ResultContainer resultContainer = new ResultContainer();
 
     private final ContainerLevelAccess access;
@@ -71,13 +72,16 @@ public class IronCauldronMenu extends AbstractContainerMenu {
         }
     }
 
+    /* ===== Shift 点击（暂不支持） ===== */
     @Override
-    public @NotNull ItemStack quickMoveStack(Player p_38941_, int p_38942_) {
-        // TODO: Implement quick move stack logic if needed
-        return ItemStack.EMPTY; // 返回空堆栈表示不进行快速移动
+    public @NotNull ItemStack quickMoveStack(Player player, int index) {
+        return ItemStack.EMPTY;
     }
 
-    /* ===== 核心：当输入变化时重新计算结果 ===== */
+    /* ================================================= */
+    /* ================= 合成结果计算 ================= */
+    /* ================================================= */
+
     @Override
     public void slotsChanged(Container container) {
         access.execute((level, pos) -> {
@@ -86,7 +90,8 @@ public class IronCauldronMenu extends AbstractContainerMenu {
                         .getRecipeFor(ModRecipes.IRON_CAULDRON_TYPE.get(), craftMatrix, level);
 
                 if (recipeOpt.isPresent()) {
-                    ItemStack result = recipeOpt.get().assemble(craftMatrix, level.registryAccess());
+                    ItemStack result = recipeOpt.get()
+                            .assemble(craftMatrix, level.registryAccess());
                     resultContainer.setItem(0, result);
                 } else {
                     resultContainer.setItem(0, ItemStack.EMPTY);
@@ -95,9 +100,24 @@ public class IronCauldronMenu extends AbstractContainerMenu {
         });
     }
 
+    /* ================================================= */
+    /* ================= 关闭 GUI 行为 ================= */
+    /* ================================================= */
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+
+        // 只在服务端执行
+        if (!player.level().isClientSide) {
+            // 把 3x3 输入槽里的物品全部丢到地上
+            this.clearContainer(player, this.craftMatrix);
+        }
+    }
+
+    /* ===== 是否仍然有效 ===== */
     @Override
     public boolean stillValid(Player player) {
-        // 修正：使用你实际的自定义方块类型
         return stillValid(access, player, BlockRegistry.IRON_CAULDRON_BLOCK.get());
     }
 }
