@@ -1,12 +1,14 @@
 {
+  "borderline1-----------------------以下为模组类-----------------------1borderline": "",
   "item.bloodcraft_ss.wood_scythe": "木制镰刀",
   "item.bloodcraft_ss.stone_scythe": "石制镰刀",
   "item.bloodcraft_ss.iron_scythe": "§a铁镰刀",
   "item.bloodcraft_ss.exotic_matter": "肮脏血源",
 
   "block.bloodcraft_ss.iron_cauldron": "炼金坩埚",
+  "container.bloodcraft_ss.iron_cauldron": "炼金界面",
 
-  "borderline-----------------------以下为成就类-----------------------borderline": "",
+  "borderline0-----------------------以下为成就类-----------------------0borderline": "",
   "advancement.bloodcraft_ss.root.title": "血源本书",
   "advancement.bloodcraft_ss.root.description": "欢迎来到这个神秘的世界",
   "advancement.scythe.title": "镰刀入门",
@@ -15,7 +17,7 @@
   "advancement.exotic_matter.description": "按照书上的指引弄出来的物品",
 
 
-  "borderline1-----------------------以下为patchouli模组-----------------------1borderline": "",
+  "borderline1-----------------------以下为patchouli书籍-----------------------1borderline": "",
   "p.categories.bloodcraft.name": "血魔法学概述",
   "p.categories.bloodcraft.description": "认识血魔法",
   "p.categories.world_magic.name": "血魔法学理论",

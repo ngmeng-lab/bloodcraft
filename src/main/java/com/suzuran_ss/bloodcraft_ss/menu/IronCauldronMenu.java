@@ -9,13 +9,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
@@ -23,57 +24,114 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     /* ===== 槽位常量定义 ===== */
+    // 使用2x2网格，所以有4个输入槽
     public static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
-    private static final int CRAFT_SLOT_END = 10;
-    private static final int INV_SLOT_START = 10;
-    private static final int INV_SLOT_END = 37;
-    private static final int USE_ROW_SLOT_START = 37;
-    private static final int USE_ROW_SLOT_END = 46;
+    private static final int CRAFT_SLOT_COUNT = 4; // 2x2 = 4个槽位
+    private static final int CRAFT_SLOT_END = CRAFT_SLOT_START + CRAFT_SLOT_COUNT;
+
+    // 玩家背包槽位索引不变
+    private static final int INV_SLOT_START = CRAFT_SLOT_END;
+    private static final int INV_SLOT_END = INV_SLOT_START + 27;
+    private static final int USE_ROW_SLOT_START = INV_SLOT_END;
+    private static final int USE_ROW_SLOT_END = USE_ROW_SLOT_START + 9;
 
     /* ===== 容器 ===== */
-    private final CraftingContainer craftSlots = new TransientCraftingContainer(this, 3, 3);
+    private final CraftingContainer craftSlots;
     private final ResultContainer resultSlots = new ResultContainer();
     private final ContainerLevelAccess access;
     private final Player player;
 
+    // 自定义槽位位置
+    private final List<SlotPosition> inputSlotPositions = new ArrayList<>();
+    private final SlotPosition resultSlotPosition;
+
+    // 槽位位置类
+    public static class SlotPosition {
+        public final int x;
+        public final int y;
+
+        public SlotPosition(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    // 默认构造函数 - 使用默认2x2布局
     public IronCauldronMenu(int id, Inventory playerInventory) {
-        this(id, playerInventory, ContainerLevelAccess.NULL);
+        this(id, playerInventory, ContainerLevelAccess.NULL,
+                getDefault2x2InputPositions(), new SlotPosition(124, 35));
     }
 
     public IronCauldronMenu(int id, Inventory playerInventory, ContainerLevelAccess access) {
-        // 使用自定义的菜单类型，而不是 MenuType.CRAFTING
+        this(id, playerInventory, access,
+                getDefault2x2InputPositions(), new SlotPosition(124, 35));
+    }
+
+    // 主构造函数 - 允许自定义所有槽位位置
+    public IronCauldronMenu(int id, Inventory playerInventory, ContainerLevelAccess access,
+                            List<SlotPosition> inputPositions, SlotPosition resultPosition) {
         super(MenuRegistry.IRON_CAULDRON_MENU.get(), id);
         this.access = access;
         this.player = playerInventory.player;
 
-        LOGGER.info("[IronCauldron] GUI opened by player: {}", playerInventory.player.getName().getString());
+        // 创建2x2的CraftingContainer
+        this.craftSlots = new TransientCraftingContainer(this, 2, 2);
 
-        /* ===== 结果槽 ===== */
+        // 验证输入位置数量
+        if (inputPositions.size() != CRAFT_SLOT_COUNT) {
+            LOGGER.warn("[IronCauldron] 输入位置数量({})与输入槽数量({})不匹配，使用默认位置",
+                    inputPositions.size(), CRAFT_SLOT_COUNT);
+            inputSlotPositions.addAll(getDefault2x2InputPositions());
+        } else {
+            inputSlotPositions.addAll(inputPositions);
+        }
+
+        this.resultSlotPosition = resultPosition;
+
+        // 初始化UI布局
+        initSlots(playerInventory);
+    }
+
+    // 获取默认2x2输入槽位置
+    private static List<SlotPosition> getDefault2x2InputPositions() {
+        List<SlotPosition> positions = new ArrayList<>();
+
+        // 2x2网格布局
+        positions.add(new SlotPosition(30, 17));  // 左上 (0,0)
+        positions.add(new SlotPosition(48, 17));  // 右上 (1,0)
+        positions.add(new SlotPosition(30, 35));  // 左下 (0,1)
+        positions.add(new SlotPosition(48, 35));  // 右下 (1,1)
+
+        return positions;
+    }
+
+    // 初始化所有槽位
+    private void initSlots(Inventory playerInventory) {
+        /* ===== 1. 结果槽 ===== */
         this.addSlot(new IronCauldronResultSlot(
                 playerInventory.player,
                 this.craftSlots,
                 this.resultSlots,
                 RESULT_SLOT,
-                124,
-                35
+                resultSlotPosition.x,
+                resultSlotPosition.y
         ));
 
-        /* ===== 3x3 输入槽 ===== */
-        for(int row = 0; row < 3; ++row) {
-            for(int col = 0; col < 3; ++col) {
-                this.addSlot(new Slot(
-                        this.craftSlots,
-                        col + row * 3,
-                        30 + col * 18,
-                        17 + row * 18
-                ));
-            }
+        /* ===== 2. 2x2输入槽 - 使用自定义位置 ===== */
+        for (int i = 0; i < CRAFT_SLOT_COUNT; i++) {
+            SlotPosition position = inputSlotPositions.get(i);
+            this.addSlot(new Slot(
+                    this.craftSlots,
+                    i,
+                    position.x,
+                    position.y
+            ));
         }
 
-        /* ===== 玩家背包 ===== */
-        for(int row = 0; row < 3; ++row) {
-            for(int col = 0; col < 9; ++col) {
+        /* ===== 3. 玩家背包 ===== */
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
                 this.addSlot(new Slot(
                         playerInventory,
                         col + row * 9 + 9,
@@ -83,8 +141,8 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
             }
         }
 
-        /* ===== 快捷栏 ===== */
-        for(int col = 0; col < 9; ++col) {
+        /* ===== 4. 玩家快捷栏 ===== */
+        for (int col = 0; col < 9; ++col) {
             this.addSlot(new Slot(
                     playerInventory,
                     col,
@@ -94,65 +152,34 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
         }
     }
 
-    /* ===== 合成逻辑 ===== */
+    /* ===== 合成逻辑 - 支持原版配方 ===== */
     protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, Level level, Player player,
                                                   CraftingContainer craftSlots, ResultContainer resultSlots) {
         if (!level.isClientSide) {
-            LOGGER.info("[IronCauldron] 检测合成网格变化 (服务器端)");
-
-            // 打印输入槽位信息
-            for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-                ItemStack stack = craftSlots.getItem(i);
-                String itemInfo = stack.isEmpty() ? "EMPTY" :
-                        String.format("%s x%d",
-                                stack.getItem().getDescription().getString(),
-                                stack.getCount());
-                LOGGER.info("[IronCauldron] 输入槽位 {}: {}", i, itemInfo);
-            }
-
-            // 原版逻辑：尝试匹配配方
+            // 原版逻辑：尝试匹配配方（2x2合成网格）
             Optional<CraftingRecipe> optional = level.getRecipeManager()
                     .getRecipeFor(RecipeType.CRAFTING, craftSlots, level);
 
             if (optional.isPresent()) {
                 CraftingRecipe recipe = optional.get();
-                ItemStack result = recipe.assemble(craftSlots, level.registryAccess());
+                // 检查配方是否可以在2x2网格中合成
+                if (recipe.canCraftInDimensions(2, 2)) {
+                    ItemStack result = recipe.assemble(craftSlots, level.registryAccess());
 
-                if (result.isItemEnabled(level.enabledFeatures())) {
-                    LOGGER.info("[IronCauldron] 找到配方，生成结果: {}", result.getItem().getDescription().getString());
-                    resultSlots.setRecipeUsed(recipe);
-                    resultSlots.setItem(0, result);
+                    if (result.isItemEnabled(level.enabledFeatures())) {
+                        resultSlots.setRecipeUsed(recipe);
+                        resultSlots.setItem(0, result);
+                    } else {
+                        resultSlots.setItem(0, ItemStack.EMPTY);
+                    }
                 } else {
-                    LOGGER.info("[IronCauldron] 配方结果被禁用");
+                    // 配方需要3x3网格，但当前是2x2网格
                     resultSlots.setItem(0, ItemStack.EMPTY);
                 }
             } else {
-                // 没有匹配配方，根据你的需求自定义逻辑
-                boolean hasAnyInput = false;
-                for (int i = 0; i < craftSlots.getContainerSize(); i++) {
-                    if (!craftSlots.getItem(i).isEmpty()) {
-                        hasAnyInput = true;
-                        break;
-                    }
-                }
-
-                ItemStack currentResult = resultSlots.getItem(0);
-                LOGGER.info("[IronCauldron] 输入状态: hasAnyInput={}, 当前结果: {}", hasAnyInput,
-                        currentResult.isEmpty() ? "EMPTY" : currentResult.getItem().getDescription().getString());
-
-                if (hasAnyInput && currentResult.isEmpty()) {
-                    // 自定义逻辑：当有输入且结果为空时，生成铁锭
-                    ItemStack customResult = new ItemStack(Items.IRON_INGOT, 1);
-                    resultSlots.setItem(0, customResult);
-                    LOGGER.info("[IronCauldron] 自定义逻辑：检测到输入物品，生成铁锭");
-                } else if (!hasAnyInput && !currentResult.isEmpty()) {
-                    // 输入为空，清空结果
-                    resultSlots.setItem(0, ItemStack.EMPTY);
-                    LOGGER.info("[IronCauldron] 输入为空，清空结果槽");
-                }
+                // 没有匹配的原版配方，清空结果
+                resultSlots.setItem(0, ItemStack.EMPTY);
             }
-        } else {
-            LOGGER.info("[IronCauldron] 检测合成网格变化 (客户端)");
         }
     }
 
@@ -176,14 +203,17 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     @Override
     public boolean recipeMatches(net.minecraft.world.item.crafting.Recipe<? super CraftingContainer> recipe) {
-        return recipe.matches(this.craftSlots, this.player.level());
+        // 检查配方是否可以在2x2网格中合成
+        if (recipe.canCraftInDimensions(2, 2)) {
+            return recipe.matches(this.craftSlots, this.player.level());
+        }
+        return false;
     }
 
     @Override
     public void removed(Player player) {
         super.removed(player);
         this.access.execute((level, pos) -> {
-            LOGGER.info("[IronCauldron] 关闭容器，清理输入槽位物品");
             this.clearContainer(player, this.craftSlots);
         });
     }
@@ -261,23 +291,22 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     @Override
     public int getGridWidth() {
-        return this.craftSlots.getWidth();
+        return 2; // 2x2网格
     }
 
     @Override
     public int getGridHeight() {
-        return this.craftSlots.getHeight();
+        return 2; // 2x2网格
     }
 
     @Override
     public int getSize() {
-        return 10; // 1个结果槽 + 9个合成槽
+        return CRAFT_SLOT_COUNT + 1; // 输入槽数量 + 结果槽
     }
 
-    // 禁用配方书功能
+    // 禁用配方书功能（但仍然使用原版配方系统）
     @Override
     public net.minecraft.world.inventory.RecipeBookType getRecipeBookType() {
-        // 返回一个不存在的类型来禁用配方书
         return net.minecraft.world.inventory.RecipeBookType.CRAFTING;
     }
 
@@ -296,5 +325,22 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
     public java.util.List<net.minecraft.client.RecipeBookCategories> getRecipeBookCategories() {
         // 返回空列表，不显示任何配方书分类
         return java.util.List.of();
+    }
+
+    /* ===== 获取容器的方法 ===== */
+    public CraftingContainer getCraftSlots() {
+        return this.craftSlots;
+    }
+
+    public ResultContainer getResultSlots() {
+        return this.resultSlots;
+    }
+
+    public List<SlotPosition> getInputSlotPositions() {
+        return new ArrayList<>(inputSlotPositions);
+    }
+
+    public SlotPosition getResultSlotPosition() {
+        return resultSlotPosition;
     }
 }
