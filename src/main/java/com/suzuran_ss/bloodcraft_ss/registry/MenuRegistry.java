@@ -14,8 +14,6 @@ public class MenuRegistry {
 
     public static final RegistryObject<MenuType<IronCauldronMenu>> IRON_CAULDRON_MENU = MENUS.register("iron_cauldron",
             () -> IForgeMenuType.create((windowId, inv, data) -> {
-                // 你可以在这里根据data读取自定义位置
-                // 默认使用2x2布局
                 return new IronCauldronMenu(windowId, inv);
             }));
 }

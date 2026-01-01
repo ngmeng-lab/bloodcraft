@@ -26,7 +26,6 @@ public class IronCauldronRecipe implements Recipe<Container> {
         this.ingredients = ingredients;
     }
 
-    /* ===== 是否匹配 ===== */
     @Override
     public boolean matches(Container container, Level level) {
         for (int i = 0; i < ingredients.size(); i++) {
@@ -37,7 +36,6 @@ public class IronCauldronRecipe implements Recipe<Container> {
         return true;
     }
 
-    /* ===== 合成结果 ===== */
     @Override
     public ItemStack assemble(Container container, RegistryAccess access) {
         return result.copy();
@@ -68,9 +66,6 @@ public class IronCauldronRecipe implements Recipe<Container> {
         return ModRecipes.IRON_CAULDRON_TYPE.get();
     }
 
-    /* ===================================================== */
-    /* ================= Serializer ======================== */
-    /* ===================================================== */
 
     public static class Serializer implements RecipeSerializer<IronCauldronRecipe> {
 

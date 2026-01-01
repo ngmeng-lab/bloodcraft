@@ -30,7 +30,6 @@ public class IronCauldronResultSlot extends Slot {
         this.craftSlots = craftSlots;
     }
 
-    /* 禁止手动放入 */
     @Override
     public boolean mayPlace(ItemStack stack) {
         return false;
@@ -59,11 +58,9 @@ public class IronCauldronResultSlot extends Slot {
     protected void checkTakeAchievements(ItemStack stack) {
         if (this.removeCount > 0) {
             stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
-            // 触发合成事件（Forge事件）
             net.minecraftforge.event.ForgeEventFactory.firePlayerCraftingEvent(this.player, stack, this.craftSlots);
         }
 
-        // 如果结果容器实现了RecipeHolder，则授予配方使用统计
         if (this.container instanceof net.minecraft.world.inventory.RecipeHolder recipeHolder) {
             recipeHolder.awardUsedRecipes(this.player, this.craftSlots.getItems());
         }
@@ -82,7 +79,6 @@ public class IronCauldronResultSlot extends Slot {
                 stack.getCount()
         );
 
-        // 处理剩余物品（参考原版合成台）
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(player);
         NonNullList<ItemStack> remainingItems = player.level().getRecipeManager()
                 .getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, player.level());
@@ -93,27 +89,22 @@ public class IronCauldronResultSlot extends Slot {
             ItemStack remainingItem = remainingItems.get(i);
 
             if (!slotItem.isEmpty()) {
-                // 移除已使用的物品
                 this.craftSlots.removeItem(i, 1);
                 slotItem = this.craftSlots.getItem(i);
             }
 
             if (!remainingItem.isEmpty()) {
                 if (slotItem.isEmpty()) {
-                    // 如果有剩余物品，放入输入槽
                     this.craftSlots.setItem(i, remainingItem);
                 } else if (ItemStack.isSameItemSameTags(slotItem, remainingItem)) {
-                    // 如果相同物品，合并数量
                     remainingItem.grow(slotItem.getCount());
                     this.craftSlots.setItem(i, remainingItem);
                 } else if (!player.getInventory().add(remainingItem)) {
-                    // 如果背包放不下，掉落在地
                     player.drop(remainingItem, false);
                 }
             }
         }
 
-        // 通知容器更新
         this.setChanged();
     }
 }

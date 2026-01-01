@@ -16,16 +16,13 @@ public class IronCauldronScreen extends AbstractContainerScreen<IronCauldronMenu
 
     public IronCauldronScreen(IronCauldronMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
-        // 设置GUI尺寸
-        this.imageWidth = 176;  // 标准容器宽度
-        this.imageHeight = 166; // 标准容器高度
+        this.imageWidth = 176;
+        this.imageHeight = 166;
     }
 
     @Override
     protected void init() {
         super.init();
-        // 移除配方书按钮
-        // 不调用任何配方书初始化代码
     }
 
     @Override
@@ -33,19 +30,16 @@ public class IronCauldronScreen extends AbstractContainerScreen<IronCauldronMenu
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        // 渲染UI背景
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        // 渲染整个UI纹理
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
-        // 这里可以根据合成进度渲染其他元素
     }
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        // 渲染标题
+
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
         // 渲染玩家库存标签
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 0x404040, false);

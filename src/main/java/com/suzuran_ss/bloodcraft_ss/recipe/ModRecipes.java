@@ -12,7 +12,6 @@ public class ModRecipes {
     public static final DeferredRegister<RecipeType<?>> TYPES =
             DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, bloodcraft.MODID);
 
-    /* ===== RecipeType ===== */
     public static final RegistryObject<RecipeType<IronCauldronRecipe>> IRON_CAULDRON_TYPE =
             TYPES.register("iron_cauldron", () -> new RecipeType<>() {
                 @Override
@@ -21,7 +20,6 @@ public class ModRecipes {
                 }
             });
 
-    /* ===== Serializer ===== */
     public static final RegistryObject<RecipeSerializer<IronCauldronRecipe>> IRON_CAULDRON_SERIALIZER =
             SERIALIZERS.register("iron_cauldron", IronCauldronRecipe.Serializer::new);
 }
