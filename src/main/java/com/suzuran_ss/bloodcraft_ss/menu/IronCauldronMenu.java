@@ -38,9 +38,10 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
     private final ContainerLevelAccess access;
     private final Player player;
 
-    private final List<SlotPosition> inputSlotPositions = new ArrayList<>();
+    private final List<SlotPosition> inputPositions = new ArrayList<>();
     private final SlotPosition resultSlotPosition;
 
+    // 存绝对坐标
     public static class SlotPosition {
         public final int x;
         public final int y;
@@ -72,9 +73,9 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
         if (inputPositions.size() != CRAFT_SLOT_COUNT) {
             LOGGER.warn("[IronCauldron] 输入位置数量({})与输入槽数量({})不匹配，使用默认位置",
                     inputPositions.size(), CRAFT_SLOT_COUNT);
-            inputSlotPositions.addAll(getDefault2x2InputPositions());
+            this.inputPositions.addAll(getDefault2x2InputPositions());
         } else {
-            inputSlotPositions.addAll(inputPositions);
+            this.inputPositions.addAll(inputPositions);
         }
 
         this.resultSlotPosition = resultPosition;
@@ -84,54 +85,51 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     private static List<SlotPosition> getDefault2x2InputPositions() {
         List<SlotPosition> positions = new ArrayList<>();
-
-        // 2x2网格布局
-        positions.add(new SlotPosition(130, 30));  //左
-        positions.add(new SlotPosition(90, 10));  //上
-        positions.add(new SlotPosition(90, 50));  //下
-        positions.add(new SlotPosition(50, 30));  //右
-
+        positions.add(new SlotPosition(130, 30)); // 左
+        positions.add(new SlotPosition(90, 7));  // 上
+        positions.add(new SlotPosition(90, 53));  // 下
+        positions.add(new SlotPosition(50, 30));  // 右
         return positions;
     }
 
     private void initSlots(Inventory playerInventory) {
-        this.addSlot(new IronCauldronResultSlot(
+        // 结果槽
+        Slot resultSlot = new IronCauldronResultSlot(
                 playerInventory.player,
                 this.craftSlots,
                 this.resultSlots,
                 RESULT_SLOT,
                 resultSlotPosition.x,
                 resultSlotPosition.y
-        ));
+        );
+        this.addSlot(resultSlot);
+        LOGGER.info("[IronCauldron] 添加结果槽: index={}, x={}, y={}", RESULT_SLOT, resultSlotPosition.x, resultSlotPosition.y);
 
+        // 输入槽
         for (int i = 0; i < CRAFT_SLOT_COUNT; i++) {
-            SlotPosition position = inputSlotPositions.get(i);
-            this.addSlot(new Slot(
-                    this.craftSlots,
-                    i,
-                    position.x,
-                    position.y
-            ));
+            SlotPosition pos = inputPositions.get(i);
+            Slot inputSlot = new Slot(this.craftSlots, i, pos.x, pos.y);
+            this.addSlot(inputSlot);
+            LOGGER.info("[IronCauldron] 添加输入槽: index={}, x={}, y={}", i, pos.x, pos.y);
         }
 
+        // 玩家背包
+        int slotSize = 18;
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
-                this.addSlot(new Slot(
-                        playerInventory,
-                        col + row * 9 + 9,
-                        8 + col * 18,
-                        84 + row * 18
-                ));
+                int index = col + row * 9 + 9;
+                int x = 8 + col * slotSize;
+                int y = 84 + row * slotSize;
+                this.addSlot(new Slot(playerInventory, index, x, y));
             }
         }
 
+        // 热键栏
         for (int col = 0; col < 9; ++col) {
-            this.addSlot(new Slot(
-                    playerInventory,
-                    col,
-                    8 + col * 18,
-                    142
-            ));
+            int index = col;
+            int x = 8 + col * slotSize;
+            int y = 142;
+            this.addSlot(new Slot(playerInventory, index, x, y));
         }
     }
 
@@ -145,7 +143,6 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
                 CraftingRecipe recipe = optional.get();
                 if (recipe.canCraftInDimensions(2, 2)) {
                     ItemStack result = recipe.assemble(craftSlots, level.registryAccess());
-
                     if (result.isItemEnabled(level.enabledFeatures())) {
                         resultSlots.setRecipeUsed(recipe);
                         resultSlots.setItem(0, result);
@@ -181,19 +178,13 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     @Override
     public boolean recipeMatches(net.minecraft.world.item.crafting.Recipe<? super CraftingContainer> recipe) {
-
-        if (recipe.canCraftInDimensions(2, 2)) {
-            return recipe.matches(this.craftSlots, this.player.level());
-        }
-        return false;
+        return recipe.canCraftInDimensions(2, 2) && recipe.matches(this.craftSlots, this.player.level());
     }
 
     @Override
     public void removed(Player player) {
         super.removed(player);
-        this.access.execute((level, pos) -> {
-            this.clearContainer(player, this.craftSlots);
-        });
+        this.access.execute((level, pos) -> this.clearContainer(player, this.craftSlots));
     }
 
     @Override
@@ -211,10 +202,7 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
             itemstack = itemstack1.copy();
 
             if (index == RESULT_SLOT) {
-
-                this.access.execute((level, pos) -> {
-                    itemstack1.getItem().onCraftedBy(itemstack1, level, player);
-                });
+                this.access.execute((level, pos) -> itemstack1.getItem().onCraftedBy(itemstack1, level, player));
 
                 if (!this.moveItemStackTo(itemstack1, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
                     return ItemStack.EMPTY;
@@ -222,7 +210,6 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
                 slot.onQuickCraft(itemstack1, itemstack);
             } else if (index >= INV_SLOT_START && index < USE_ROW_SLOT_END) {
-
                 if (!this.moveItemStackTo(itemstack1, CRAFT_SLOT_START, CRAFT_SLOT_END, false)) {
                     if (index < INV_SLOT_END) {
                         if (!this.moveItemStackTo(itemstack1, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
@@ -236,20 +223,13 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
+            if (itemstack1.isEmpty()) slot.setByPlayer(ItemStack.EMPTY);
+            else slot.setChanged();
 
-            if (itemstack1.getCount() == itemstack.getCount()) {
-                return ItemStack.EMPTY;
-            }
+            if (itemstack1.getCount() == itemstack.getCount()) return ItemStack.EMPTY;
 
             slot.onTake(player, itemstack1);
-            if (index == RESULT_SLOT) {
-                player.drop(itemstack1, false);
-            }
+            if (index == RESULT_SLOT) player.drop(itemstack1, false);
         }
 
         return itemstack;
@@ -267,22 +247,22 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     @Override
     public int getGridWidth() {
-        return 2; // 2x2网格
+        return 2;
     }
 
     @Override
     public int getGridHeight() {
-        return 2; // 2x2网格
+        return 2;
     }
 
     @Override
     public int getSize() {
-        return CRAFT_SLOT_COUNT + 1; // 输入槽数量 + 结果槽
+        return CRAFT_SLOT_COUNT + 1;
     }
 
     @Override
-    public net.minecraft.world.inventory.RecipeBookType getRecipeBookType() {
-        return net.minecraft.world.inventory.RecipeBookType.CRAFTING;
+    public RecipeBookType getRecipeBookType() {
+        return RecipeBookType.CRAFTING;
     }
 
     @Override
@@ -305,13 +285,5 @@ public class IronCauldronMenu extends RecipeBookMenu<CraftingContainer> {
 
     public ResultContainer getResultSlots() {
         return this.resultSlots;
-    }
-
-    public List<SlotPosition> getInputSlotPositions() {
-        return new ArrayList<>(inputSlotPositions);
-    }
-
-    public SlotPosition getResultSlotPosition() {
-        return resultSlotPosition;
     }
 }

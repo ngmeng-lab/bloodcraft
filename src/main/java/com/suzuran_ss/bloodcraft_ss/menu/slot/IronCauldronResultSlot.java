@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 public class IronCauldronResultSlot extends Slot {
@@ -69,15 +70,8 @@ public class IronCauldronResultSlot extends Slot {
     }
 
     @Override
-    public void onTake(Player player, ItemStack stack) {
+    public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
         this.checkTakeAchievements(stack);
-
-        LOGGER.info(
-                "[IronCauldron] 玩家 {} 取走了结果槽物品：{} x{}",
-                player.getName().getString(),
-                stack.getItem().getDescription().getString(),
-                stack.getCount()
-        );
 
         net.minecraftforge.common.ForgeHooks.setCraftingPlayer(player);
         NonNullList<ItemStack> remainingItems = player.level().getRecipeManager()
